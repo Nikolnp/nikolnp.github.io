@@ -1,38 +1,3 @@
-#projects {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.project-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0.5rem;
-  width: 30%;
-}
-
-.project-box img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 1rem;
-}
-
-.project-box h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.project-box p {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.project-box a {
-  background-color: #333;
-  color: #fff;
-  padding: 0.5rem 
-    
 * {
   box-sizing: border-box;
 }
@@ -44,4 +9,3 @@ body {
 }
 
 header {
-
