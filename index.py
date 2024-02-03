@@ -1,8 +1,17 @@
 import streamlit as st
 
-# Function to create draggable animal image using st.image
+# Function to create draggable animal image using custom HTML
 def draggable_animal(name, image_url):
-    return st.image(image_url, caption=name, use_container_width=True, key=name, draggable=True)
+    return f"""
+        <img id="{name.lower()}-image" src="{image_url}" alt="{name}" style="width: 80px; height: 80px; cursor: move;" draggable="true"
+            ondragstart="dragStart(event)">
+        <script>
+            function dragStart(event) {{
+                event.dataTransfer.setData("text", event.target.id);
+                event.target.style.opacity = '0.4';
+            }}
+        </script>
+    """
 
 # Streamlit app
 def main():
@@ -16,9 +25,9 @@ def main():
         {"name": "Chicken", "image_url": "https://example.com/chicken.png", "color": "orange"},
     ]
 
-    # Display draggable animal images
+    # Display draggable animal images using custom HTML
     for animal in animals:
-        draggable_animal(animal["name"], animal["image_url"])
+        st.markdown(draggable_animal(animal["name"], animal["image_url"]), unsafe_allow_html=True)
 
     # Display farm area
     farm_area = st.empty()
@@ -29,27 +38,24 @@ def main():
     # JavaScript code for drop and allowDrop functions
     js_code = """
         <script>
-            var draggedItem = null;
-
             function allowDrop(event) {
                 event.preventDefault();
             }
 
-            function dragStart(event) {
-                draggedItem = event.target;
-                event.dataTransfer.setData("text", draggedItem.id);
-            }
-
             function drop(event) {
                 event.preventDefault();
-                var droppedItem = document.getElementById(event.dataTransfer.getData("text"));
-                draggedItem.style.opacity = "1";  // Reset opacity
+                var data = event.dataTransfer.getData("text");
+
+                // Get the dragged animal's name
+                var animalName = data.split("-")[0];
 
                 // Display the animal dropped into the farm
                 var outputContent = document.getElementById("output-content");
-                outputContent.innerHTML = "Dropped a " + droppedItem.alt + " into the farm!";
+                outputContent.innerHTML = "Dropped a " + animalName + " into the farm!";
 
                 // Move the dragged animal image into the farm area
+                var droppedItem = document.getElementById(data);
+                droppedItem.style.opacity = "1";  // Reset opacity
                 var farmArea = document.getElementById("farm-area");
                 farmArea.appendChild(droppedItem);
             }
