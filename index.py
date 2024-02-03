@@ -11,8 +11,12 @@ def download_image(image_url, filename):
 
 # Function to create draggable animal image using HTML and JavaScript
 def draggable_animal(name, local_image_path):
+    with open(local_image_path, 'rb') as f:
+        image_data = f.read()
+        image_base64 = base64.b64encode(image_data).decode()
+    
     return f"""
-        <img id="{name.lower()}-image" draggable="true" ondragstart="drag(event)" src="data:image/png;base64, {local_image_path}" style="width: 80px; height: 80px; cursor: move;">
+        <img id="{name.lower()}-image" draggable="true" ondragstart="drag(event)" src="data:image/png;base64, {image_base64}" style="width: 80px; height: 80px; cursor: move;">
     """
 
 # Streamlit app
