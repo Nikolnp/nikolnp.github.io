@@ -20,7 +20,7 @@ def main():
 
     # Display draggable animal images
     for animal in animals:
-        st.markdown(draggable_animal(animal["name"], animal["image_url"]), unsafe_allow_html=True)
+        st.image(animal["image_url"], width=80, caption=animal["name"], use_container_width=False)
 
     # Display farm area
     farm_area = st.markdown("<div id='farm-area' ondrop='drop(event)' ondragover='allowDrop(event)' style='width: 500px; height: 400px; border: 2px solid #4CAF50; margin: 20px; padding: 10px; position: relative;'></div>", unsafe_allow_html=True)
