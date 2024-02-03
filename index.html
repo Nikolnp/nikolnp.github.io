@@ -1,173 +1,57 @@
+import streamlit as st
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>W3.CSS Template</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <style>
-    body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-    </style>
-  </head>
-<body class="w3-light-grey">
-
-<!-- w3-content defines a container for fixed size centered content, 
-and is wrapped around the whole page content, except for the footer in this example -->
-<div class="w3-content" style="max-width:1400px">
-
-<!-- Header -->
-<header class="w3-container w3-center w3-padding-32"> 
-  <h1><b>BLOG</b></h1>
-  <p>Welcome to my <span class="w3-tag">Story</span></p>
-</header>
-
-<!-- Grid -->
-<div class="w3-row">
-
-<!-- Blog entries -->
-<div class="w3-col l8 s12">
-  <!-- Blog entry -->
-  <div class="w3-card-4 w3-margin w3-white">
-    <img src="https://www.w3schools.com/w3images/woods.jpg" alt="Nature" style="width:100%">
-    <div class="w3-container">
-      <h3><b>TITLE HEADING</b></h3>
-      <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5>
-    </div>
-
-    <div class="w3-container">
-      <p>It all started with a great idea: the emancipation of women. Many women throughout history have played crucial roles in this movement, and two women who have inspired me personally are Katherine Johnson and Jane Austen.
-
-Katherine Johnson was a remarkable black woman who worked as a human computer at NASA. Her calculations of orbital mechanics were essential to the success of the first and subsequent U.S. crewed spaceflights, and her contributions paved the way for women and people of color in science and engineering. In the movie "Hidden Figures," which tells her story, we see how Katherine overcame discrimination and sexism to achieve greatness.
-
-Jane Austen, on the other hand, was a writer who lived in the late 18th and early 19th centuries. She is famous for her novels, such as "Pride and Prejudice," which portray women in a different light than they were traditionally seen at the time. Austen's characters were strong-willed and intelligent, and she paved the way for women writers to follow in her footsteps.
-
-Both Katherine Johnson and Jane Austen have something in common: they defied traditional gender roles and helped pave the way for women to achieve their full potential.
-
-For me, reading about these remarkable women inspired me to pursue a career in science and engineering. I am a woman, and I know firsthand how challenging it can be to break into male-dominated fields. But I am not deterred; I am motivated to succeed and prove that women can excel in any field they choose.
-
-In addition to reading about these remarkable women, I have also read many books that have inspired me to pursue my dreams. One such book is "The Alchemist" by Paulo Coelho. This novel tells the story of a young shepherd boy who sets out to fulfill his dreams and discover his purpose in life. Reading "The Alchemist" gave me the courage to pursue my own dreams, and it has been an invaluable source of inspiration for me.
-
-At the age of 18, I left my home and moved to London alone. This was a daunting step, but it was also an opportunity for me to prove to myself that I could be independent and self-sufficient. I worked long hours, took on multiple jobs, and ate junk food just to make ends meet. But through it all, I remained committed to my goal of becoming a successful computer scientist and engineer.
-
-Over the years, I have accomplished a great deal. I found my first job, completed a year-long course to advance my career, and eventually went to university. These achievements required a lot of sacrifice and hard work, but they were worth it.
-
-There have been many obstacles along the way, and at times, I have struggled with panic attacks and depression. But I am determined to overcome these challenges and achieve my goals.
-
-Looking back on my journey, I am proud of what I have accomplished. I am grateful for the women who have inspired me, the books that have motivated me, and the experiences that have shaped me. And as I continue to pursue my dreams, I know that I will face more challenges, but I am ready to face them head-on.
-
-In conclusion, the story of Katherine Johnson and Jane Austen reminds us that women can achieve greatness in any field. It is up to us to break down the barriers that stand in our way and pursue our dreams with courage and determination.</p>
-      <div class="w3-row">
-        <div class="w3-col m8 s12">
-          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+# Function to create draggable block using HTML and JavaScript
+def draggable_block():
+    return f"""
+        <div id="draggable-block" draggable="true" ondragstart="drag(event)">
+            Block
         </div>
-        <div class="w3-col m4 w3-hide-small">
-          <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-tag">0</span></span></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <hr>
+        <script>
+            function drag(event) {{
+                event.dataTransfer.setData("text", event.target.id);
+            }}
+        </script>
+    """
 
-  <!-- Blog entry -->
-  <div class="w3-card-4 w3-margin w3-white">
-  <img src="https://www.w3schools.com/w3images/bridge.jpg" alt="Norway" style="width:100%">
-    <div class="w3-container">
-      <h3><b>BLOG ENTRY</b></h3>
-      <h5>Title description, <span class="w3-opacity">April 2, 2014</span></h5>
-    </div>
+# Streamlit app
+def main():
+    st.title("Drag and Drop Programming for Kids")
 
-    <div class="w3-container">
-      <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed
-        tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      <div class="w3-row">
-        <div class="w3-col m8 s12">
-          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
-        </div>
-        <div class="w3-col m4 w3-hide-small">
-          <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-badge">2</span></span></p>
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- END BLOG ENTRIES -->
-</div>
+    # Display the draggable block
+    st.markdown(draggable_block(), unsafe_allow_html=True)
 
-<!-- Introduction menu -->
-<div class="w3-col l4">
-  <!-- About Card -->
-  <div class="w3-card w3-margin w3-margin-top">
-  <img src="https://www.w3schools.com/w3images/avatar_g.jpg" style="width:100%">
-    <div class="w3-container w3-white">
-      <h4><b>My Name</b></h4>
-      <p>Just me, myself and I, exploring the universe of uknownment. I have a heart of love and a interest of lorem ipsum and mauris neque quam blog. I want to share my world with you.</p>
-    </div>
-  </div><hr>
-  
-  <!-- Posts -->
-  <div class="w3-card w3-margin">
-    <div class="w3-container w3-padding">
-      <h4>Popular Posts</h4>
-    </div>
-    <ul class="w3-ul w3-hoverable w3-white">
-      <li class="w3-padding-16">
-        <img src="https://www.w3schools.com/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
-        <span class="w3-large">Lorem</span><br>
-        <span>Sed mattis nunc</span>
-      </li>
-      <li class="w3-padding-16">
-        <img src="https://www.w3schools.com/w3images/gondol.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
-        <span class="w3-large">Ipsum</span><br>
-        <span>Praes tinci sed</span>
-      </li> 
-      <li class="w3-padding-16">
-        <img src="https://www.w3schools.com/w3images/skies.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
-        <span class="w3-large">Dorum</span><br>
-        <span>Ultricies congue</span>
-      </li>   
-      <li class="w3-padding-16 w3-hide-medium w3-hide-small">
-        <img src="https://www.w3schools.com/w3images/rock.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
-        <span class="w3-large">Mingsum</span><br>
-        <span>Lorem ipsum dipsum</span>
-      </li>  
-    </ul>
-  </div>
-  <hr> 
- 
-  <!-- Labels / tags -->
-  <div class="w3-card w3-margin">
-    <div class="w3-container w3-padding">
-      <h4>Tags</h4>
-    </div>
-    <div class="w3-container w3-white">
-    <p><span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">London</span>
-      <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">DIY</span>
-      <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Family</span>
-      <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Shopping</span>
-      <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Games</span>
-    </p>
-    </div>
-  </div>
-  
-<!-- END Introduction Menu -->
-</div>
+    # Display drop area
+    drop_area = st.markdown("<div id='code-area' ondrop='drop(event)' ondragover='allowDrop(event)'></div>", unsafe_allow_html=True)
 
-<!-- END GRID -->
-</div><br>
+    # Display output area
+    output_area = st.empty()
 
-<!-- END w3-content -->
-</div>
+    # JavaScript code for drop and allowDrop functions
+    js_code = """
+        <script>
+            function allowDrop(event) {
+                event.preventDefault();
+            }
 
-<!-- Footer. This section contains an ad for W3Schools Spaces. You can leave it to support us. -->
-<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
-  <button class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">Previous</button>
-  <button class="w3-button w3-black w3-padding-large w3-margin-bottom">Next »</button>
-  <p class="w3-small">This website was made with W3schools Spaces. Make your own free website today!</p>
-  <a class="w3-button w3-round-xxlarge w3-small w3-light-grey w3-margin-bottom" href="https://www.w3schools.com/spaces" target="_blank">Start now</a>
-  <!-- End footer. -->
-  </footer>
- 
+            function drop(event) {
+                event.preventDefault();
+                var data = event.dataTransfer.getData("text");
 
-</body>
-</html>
+                // Display the block position in the output
+                var outputContent = document.getElementById("output-content");
+                var x = event.clientX - outputContent.getBoundingClientRect().left;
+                var y = event.clientY - outputContent.getBoundingClientRect().top;
+                outputContent.innerHTML = "Block dropped at X: " + x + ", Y: " + y;
+
+                // Remove the draggable block from the code area
+                var draggableBlock = document.getElementById("draggable-block");
+                draggableBlock.remove();
+            }
+        </script>
+    """
+    
+    # Add JavaScript code to the output area
+    output_area.markdown(js_code, unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()
