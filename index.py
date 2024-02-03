@@ -53,8 +53,8 @@ def main():
                 // Move the dragged animal image into the farm area
                 var draggableAnimal = document.getElementById(data);
                 var farmArea = document.getElementById("farm-area");
-                var x = event.clientX - farmArea.getBoundingClientRect().left;
-                var y = event.clientY - farmArea.getBoundingClientRect().top;
+                var x = event.clientX - farmArea.getBoundingClientRect().left - draggableAnimal.width / 2;
+                var y = event.clientY - farmArea.getBoundingClientRect().top - draggableAnimal.height / 2;
                 draggableAnimal.style.position = "absolute";
                 draggableAnimal.style.left = x + "px";
                 draggableAnimal.style.top = y + "px";
