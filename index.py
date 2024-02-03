@@ -1,5 +1,4 @@
 import streamlit as st
-import base64
 
 # Function to create draggable animal image using HTML and JavaScript
 def draggable_animal(name, image_url):
@@ -19,9 +18,9 @@ def main():
         {"name": "Chicken", "image_url": "https://example.com/chicken.png", "color": "orange"},
     ]
 
-    # Display draggable animal images
+    # Display draggable animal images using HTML
     for animal in animals:
-        st.image(animal["image_url"], width=80, caption=animal["name"], use_container_width=False)
+        st.markdown(draggable_animal(animal["name"], animal["image_url"]), unsafe_allow_html=True)
 
     # Display farm area
     farm_area = st.markdown("<div id='farm-area' ondrop='drop(event)' ondragover='allowDrop(event)' style='width: 500px; height: 400px; border: 2px solid #4CAF50; margin: 20px; padding: 10px; position: relative;'></div>", unsafe_allow_html=True)
