@@ -1,9 +1,15 @@
 import streamlit as st
+import urllib.request
+from PIL import Image
+
+# Function to download and save image
+def download_image(image_url, filename):
+    urllib.request.urlretrieve(image_url, filename)
 
 # Function to create draggable animal image using HTML and JavaScript
-def draggable_animal(name, image_url):
+def draggable_animal(name, local_image_path):
     return f"""
-        <img id="{name.lower()}-image" draggable="true" ondragstart="drag(event)" src="{image_url}" style="width: 80px; height: 80px; cursor: move;">
+        <img id="{name.lower()}-image" draggable="true" ondragstart="drag(event)" src="{local_image_path}" style="width: 80px; height: 80px; cursor: move;">
     """
 
 # Streamlit app
@@ -17,6 +23,11 @@ def main():
         {"name": "Cow", "image_url": "https://example.com/cow.png", "color": "black"},
         {"name": "Chicken", "image_url": "https://example.com/chicken.png", "color": "orange"},
     ]
+
+    # Download and save images locally
+    for animal in animals:
+        local_image_path = f"{animal['name'].lower()}_image.png"
+        download_image(animal["image_url"], local_image_path)
 
     # Display draggable animal images
     for animal in animals:
