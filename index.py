@@ -1,10 +1,8 @@
 import streamlit as st
 
-# Function to create draggable animal image using HTML and JavaScript
+# Function to create draggable animal image using st.image
 def draggable_animal(name, image_url):
-    return f"""
-        <img id="{name.lower()}-image" draggable="true" ondragstart="drag(event)" src="{image_url}" style="width: 80px; height: 80px; cursor: move;">
-    """
+    return st.image(image_url, caption=name, use_container_width=True, key=name, draggable=True)
 
 # Streamlit app
 def main():
@@ -18,12 +16,12 @@ def main():
         {"name": "Chicken", "image_url": "https://example.com/chicken.png", "color": "orange"},
     ]
 
-    # Display draggable animal images using HTML
+    # Display draggable animal images
     for animal in animals:
-        st.markdown(draggable_animal(animal["name"], animal["image_url"]), unsafe_allow_html=True)
+        draggable_animal(animal["name"], animal["image_url"])
 
     # Display farm area
-    farm_area = st.markdown("<div id='farm-area' ondrop='drop(event)' ondragover='allowDrop(event)' style='width: 500px; height: 400px; border: 2px solid #4CAF50; margin: 20px; padding: 10px; position: relative;'></div>", unsafe_allow_html=True)
+    farm_area = st.empty()
 
     # Display output area
     output_area = st.empty()
@@ -31,40 +29,38 @@ def main():
     # JavaScript code for drop and allowDrop functions
     js_code = """
         <script>
+            var draggedItem = null;
+
             function allowDrop(event) {
                 event.preventDefault();
             }
 
-            function drag(event) {
-                event.dataTransfer.setData("text", event.target.id);
+            function dragStart(event) {
+                draggedItem = event.target;
+                event.dataTransfer.setData("text", draggedItem.id);
             }
 
             function drop(event) {
                 event.preventDefault();
-                var data = event.dataTransfer.getData("text");
-
-                // Get the dragged animal's name
-                var animalName = data.split("-")[0];
+                var droppedItem = document.getElementById(event.dataTransfer.getData("text"));
+                draggedItem.style.opacity = "1";  // Reset opacity
 
                 // Display the animal dropped into the farm
                 var outputContent = document.getElementById("output-content");
-                outputContent.innerHTML = "Dropped a " + animalName + " into the farm!";
+                outputContent.innerHTML = "Dropped a " + droppedItem.alt + " into the farm!";
 
                 // Move the dragged animal image into the farm area
-                var draggableAnimal = document.getElementById(data);
                 var farmArea = document.getElementById("farm-area");
-                var x = event.clientX - farmArea.getBoundingClientRect().left - draggableAnimal.width / 2;
-                var y = event.clientY - farmArea.getBoundingClientRect().top - draggableAnimal.height / 2;
-                draggableAnimal.style.position = "absolute";
-                draggableAnimal.style.left = x + "px";
-                draggableAnimal.style.top = y + "px";
-                farmArea.appendChild(draggableAnimal);
+                farmArea.appendChild(droppedItem);
             }
         </script>
     """
     
     # Add JavaScript code to the output area
     output_area.markdown(js_code, unsafe_allow_html=True)
+
+    # Add an invisible HTML element for tracking drop events
+    st.markdown("<div id='farm-area' ondrop='drop(event)' ondragover='allowDrop(event)' style='width: 500px; height: 400px; border: 2px solid #4CAF50; margin: 20px; padding: 10px; position: relative;'></div>", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
