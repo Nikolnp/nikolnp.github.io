@@ -1,15 +1,18 @@
 import streamlit as st
-import urllib.request
+import requests
 from PIL import Image
+from io import BytesIO
 
 # Function to download and save image
 def download_image(image_url, filename):
-    urllib.request.urlretrieve(image_url, filename)
+    response = requests.get(image_url)
+    img = Image.open(BytesIO(response.content))
+    img.save(filename)
 
 # Function to create draggable animal image using HTML and JavaScript
 def draggable_animal(name, local_image_path):
     return f"""
-        <img id="{name.lower()}-image" draggable="true" ondragstart="drag(event)" src="{local_image_path}" style="width: 80px; height: 80px; cursor: move;">
+        <img id="{name.lower()}-image" draggable="true" ondragstart="drag(event)" src="data:image/png;base64, {local_image_path}" style="width: 80px; height: 80px; cursor: move;">
     """
 
 # Streamlit app
@@ -31,7 +34,7 @@ def main():
 
     # Display draggable animal images
     for animal in animals:
-        st.image(animal["image_url"], width=80, caption=animal["name"], use_container_width=False)
+        st.markdown(draggable_animal(animal["name"], local_image_path), unsafe_allow_html=True)
 
     # Display farm area
     farm_area = st.markdown("<div id='farm-area' ondrop='drop(event)' ondragover='allowDrop(event)' style='width: 500px; height: 400px; border: 2px solid #4CAF50; margin: 20px; padding: 10px; position: relative;'></div>", unsafe_allow_html=True)
