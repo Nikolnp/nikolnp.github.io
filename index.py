@@ -6,8 +6,8 @@ import pandas as pd
 #from sklearn.cluster import KMeans
 
 # Load the Excel file into pandas dataframe
-df_strings = pd.read_excel('molecules_task.xlsx', sheet_name='Strings', engine='xlrd')
-df_targets = pd.read_excel('molecules_task.xlsx', sheet_name='Targets', engine='xlrd')
+df_strings = pd.read_excel('molecules_task.xlsx', sheet_name='Strings', engine='pyxlsb')
+df_targets = pd.read_excel('molecules_task.xlsx', sheet_name='Targets', engine='pyxlsb')
 
 # Create TF-IDF vectorizer
 tfidf_vectorizer = TfidfVectorizer()
