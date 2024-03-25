@@ -1,1 +1,6 @@
+matplotlib.pyplot
+wordcloud
+sklearn.feature_extraction.text
+sklearn.metrics.pairwise
+sklearn.cluster
 
