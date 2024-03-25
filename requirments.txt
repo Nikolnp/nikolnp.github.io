@@ -1,7 +1,4 @@
-matplotlib.pyplot
-wordcloud
-sklearn.feature_extraction.text
-sklearn.metrics.pairwise
-sklearn.cluster
-openpyxl
-
+matplotlib==3.4.3
+wordcloud==1.8.1
+scikit-learn==0.24.2
+openpyxl==3.0.9
